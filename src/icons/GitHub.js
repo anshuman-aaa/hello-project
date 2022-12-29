@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 const GitHub = React.forwardRef(function GitHub(props, ref) {
   return (

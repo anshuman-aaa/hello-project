@@ -5,9 +5,9 @@
  */
 
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 const useStyles = makeStyles(theme => ({

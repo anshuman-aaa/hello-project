@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 const Facebook = React.forwardRef(function Facebook(props, ref) {
   const { size = 256, ...other } = props;

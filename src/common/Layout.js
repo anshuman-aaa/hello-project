@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import AppBar from './AppBar';

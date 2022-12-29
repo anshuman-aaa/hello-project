@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 const Twitter = React.forwardRef(function Twitter(props, ref) {
   const { size = 24, ...other } = props;

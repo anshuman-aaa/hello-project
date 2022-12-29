@@ -7,9 +7,10 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import { darken } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import { darken } from '@mui/material/styles';
+
+import withStyles from '@mui/styles/withStyles';
 
 import FacebookIcon from '../icons/Facebook';
 import GoogleIcon from '../icons/Google';

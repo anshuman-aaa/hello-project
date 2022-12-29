@@ -4,14 +4,17 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
+import { createTheme } from '@mui/material/styles';
 
 // https://material-ui.com/customization/themes/
 // https://material-ui.com/style/color/
-export default createMuiTheme({
+export default createTheme({
   palette: {
-    primary: indigo,
+    primary: {
+      main: '#FF7F50',
+      // https://stackoverflow.com/a/55534820/9793171
+      contrastText: '#ffffff',
+    },
   },
 
   typography: {

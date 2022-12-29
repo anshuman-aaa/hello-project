@@ -6,15 +6,15 @@
 
 import clsx from 'clsx';
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import MuiAppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@mui/material/Avatar';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import makeStyles from '@mui/styles/makeStyles';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 import Link from './Link';
 import UserMenu from './UserMenu';
@@ -87,7 +87,7 @@ function AppBar(props) {
         </Typography>
         <span style={{ flexGrow: 1 }} />
         {close ? (
-          <IconButton onClick={handleClose} color="inherit">
+          <IconButton onClick={handleClose} color="inherit" size="large">
             <CloseIcon />
           </IconButton>
         ) : (
@@ -102,6 +102,7 @@ function AppBar(props) {
                 onClick={openUserMenu}
                 aria-owns={userMenuEl ? 'user-menu' : null}
                 aria-haspopup="true"
+                size="large"
               >
                 <Avatar
                   className={s.avatar}

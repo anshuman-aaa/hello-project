@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useConfig, useFacebook } from '../hooks';
 
 const useStyles = makeStyles(theme => ({

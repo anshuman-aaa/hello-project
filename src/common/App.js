@@ -5,10 +5,10 @@
  */
 
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline';
 import { QueryRenderer } from 'react-relay';
 import { ROOT_ID, REF_KEY } from 'relay-runtime';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 
 import theme from '../theme';
 import ErrorPage from './ErrorPage';
@@ -89,23 +89,25 @@ class App extends React.PureComponent {
     } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <ConfigContext.Provider value={config}>
-          <HistoryContext.Provider value={history}>
-            <ResetContext.Provider value={reset}>
-              <CssBaseline />
-              <QueryRenderer
-                environment={relay}
-                query={query}
-                variables={variables}
-                render={this.renderProps}
-                cacheConfig={{ payload }}
-              />
-              <LoginDialog />
-            </ResetContext.Provider>
-          </HistoryContext.Provider>
-        </ConfigContext.Provider>
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <ConfigContext.Provider value={config}>
+            <HistoryContext.Provider value={history}>
+              <ResetContext.Provider value={reset}>
+                <CssBaseline />
+                <QueryRenderer
+                  environment={relay}
+                  query={query}
+                  variables={variables}
+                  render={this.renderProps}
+                  cacheConfig={{ payload }}
+                />
+                <LoginDialog />
+              </ResetContext.Provider>
+            </HistoryContext.Provider>
+          </ConfigContext.Provider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
   }
 }

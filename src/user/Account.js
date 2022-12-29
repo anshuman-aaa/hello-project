@@ -5,9 +5,9 @@
  */
 
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 const useStyles = makeStyles({

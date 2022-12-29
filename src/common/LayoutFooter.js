@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 import Link from './Link';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.content,
     color: 'rgba(0, 0, 0, 0.4)',
     borderTop: `1px solid ${theme.palette.grey[300]}`,
-    paddingTop: `${theme.spacing(2)}px !important`,
+    paddingTop: `${theme.spacing(2)} !important`,
   },
   text: {},
   copyright: {

@@ -6,8 +6,8 @@
 
 import clsx from 'clsx';
 import React from 'react';
-import MuiTextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import MuiTextField from '@mui/material/TextField';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
   root: {

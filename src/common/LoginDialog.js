@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 
 import LoginForm from './LoginForm';
 import { useAuth } from '../hooks/useAuth';
