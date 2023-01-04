@@ -13,7 +13,10 @@ import misc from './misc';
 import user from './user';
 import news from './news';
 
+import create from './new';
+
 const routes = [
+  ...create,
   ...landing,
   ...legal,
   ...misc,
