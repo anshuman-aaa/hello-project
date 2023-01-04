@@ -5,11 +5,11 @@
  */
 
 import React from 'react';
-import Paper from '@mui/material/Paper';
+// import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 
-import HomeSponsors from './HomeSponsors';
+// import HomeSponsors from './HomeSponsors';
 import HomeStack from './HomeStack';
 
 const useStyles = makeStyles(theme => ({
@@ -39,9 +39,15 @@ function Home() {
 
   return (
     <React.Fragment>
-      <HomeSponsors />
+      {/* <HomeSponsors /> */}
+      <Typography className={s.title} variant="h4" gutterBottom>
+        Removing Sponsors
+      </Typography>
       <div className={s.content}>
         <Typography className={s.title} variant="h4" gutterBottom>
+          Removing Getting Started
+        </Typography>
+        {/* <Typography className={s.title} variant="h4" gutterBottom>
           Getting Started
         </Typography>
         <Typography paragraph>
@@ -64,13 +70,13 @@ function Home() {
           <br />
           $ yarn setup
           <br />$ yarn start
-        </Paper>
+        </Paper> */}
         <Typography className={s.title} variant="h4" gutterBottom>
           Tech Stack
         </Typography>
-        <Typography className={s.subTitle} paragraph>
+        {/* <Typography className={s.subTitle} paragraph>
           Save time. Create with confidence.
-        </Typography>
+        </Typography> */}
         <HomeStack />
       </div>
     </React.Fragment>

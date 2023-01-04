@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 
 import LoginButton from '../common/LoginButton';
+import { Link } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,11 +57,13 @@ function HomeHero() {
   return (
     <div className={s.root}>
       <Typography className={s.title} variant="h3">
-        Flying start for makers
+        Jagteshver's Assignment
       </Typography>
       <Typography className={s.subTitle} variant="h5">
-        Quickly bootstrap new web application projects on a solid
-        JavaScript-based tech stack and serverless architecture
+        Bootstrapped from{' '}
+        <Link href="https://github.com/kriasoft/react-firebase-starter">
+          Kriasoft's React Firebase Starter Kit
+        </Link>
       </Typography>
       <div className={s.actions}>
         <LoginButton className={s.button} provider="google" />

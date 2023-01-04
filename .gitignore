@@ -33,3 +33,5 @@ __generated__
 .yarn-integrity
 backup.sql
 VERSION
+ASSIGNMENT.md
+yarn database commands.js
