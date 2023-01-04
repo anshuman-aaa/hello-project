@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
-import { useLocalContext } from '../../../../src/new/subject/hooks/LocalContext';
+import { useLocalContext } from './hooks/LocalContext';
 
 export default function AddExpertise(props) {
   const { setExpertise, subject, status, setStatus } = useLocalContext();

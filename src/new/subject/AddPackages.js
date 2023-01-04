@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React from 'react';
-import { useLocalContext } from '../../../../src/new/subject/hooks/LocalContext';
+import { useLocalContext } from './hooks/LocalContext';
 import Package from './SinglePackage';
 
 export default function AddPackages(props) {

@@ -16,7 +16,7 @@ export default [
         ...Layout_data
       }
     `,
-    components: () => [import('.a/new/subject/LocalContextSetup')],
+    components: () => [import('./LocalContextSetup')],
     render: ([NewSubjectContextSetup], data, { config }) => ({
       title: config.app.name,
       component: (

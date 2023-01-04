@@ -1,5 +1,5 @@
 import React from 'react';
-import { LocalContext } from '../../../../src/new/subject/hooks/LocalContext';
+import { LocalContext } from './hooks/LocalContext';
 import AddExpertise from './AddExpertise';
 import AddSubject from './AddSubject';
 import AddPackages from './AddPackages';
