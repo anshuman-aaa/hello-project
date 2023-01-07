@@ -173,4 +173,12 @@ export class Context {
         ),
       );
   });
+
+  subjectsById = new DataLoader(keys =>
+    db
+      .table('subjects')
+      .whereIn('id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
 }

@@ -97,29 +97,32 @@ function AppBar(props) {
             </Button>
             {children}
             {me && (
-              <IconButton
-                className={s.avatarButton}
-                onClick={openUserMenu}
-                aria-owns={userMenuEl ? 'user-menu' : null}
-                aria-haspopup="true"
-                size="large"
-              >
-                <Avatar
-                  className={s.avatar}
-                  src={me.photoURL}
-                  alt={me.displayName}
+              <>
+                <Button className={s.button} href="/new/subject">
+                  New Subject
+                </Button>
+                <IconButton
+                  className={s.avatarButton}
+                  onClick={openUserMenu}
+                  aria-owns={userMenuEl ? 'user-menu' : null}
+                  aria-haspopup="true"
+                  size="large"
+                >
+                  <Avatar
+                    className={s.avatar}
+                    src={me.photoURL}
+                    alt={me.displayName}
+                  />
+                </IconButton>
+                <UserMenu
+                  id="user-menu"
+                  role="menu"
+                  open={Boolean(userMenuEl)}
+                  anchorEl={userMenuEl}
+                  onClose={closeUserMenu}
+                  onOpenSettings={onOpenSettings}
                 />
-              </IconButton>
-            )}
-            {me && (
-              <UserMenu
-                id="user-menu"
-                role="menu"
-                open={Boolean(userMenuEl)}
-                anchorEl={userMenuEl}
-                onClose={closeUserMenu}
-                onOpenSettings={onOpenSettings}
-              />
+              </>
             )}
             {!me && (
               <Button className={s.button} color="inherit" onClick={signIn}>

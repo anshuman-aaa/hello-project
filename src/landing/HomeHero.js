@@ -10,6 +10,8 @@ import makeStyles from '@mui/styles/makeStyles';
 
 import LoginButton from '../common/LoginButton';
 import { Link } from '@mui/material';
+import { graphql } from 'relay-runtime';
+import { createFragmentContainer } from 'react-relay';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,9 +53,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function HomeHero() {
+function HomeHero(props) {
+  const { me } = props;
   const s = useStyles();
-
+  console.log(me);
   return (
     <div className={s.root}>
       <Typography className={s.title} variant="h3">
@@ -65,11 +68,23 @@ function HomeHero() {
           Kriasoft's React Firebase Starter Kit
         </Link>
       </Typography>
-      <div className={s.actions}>
-        <LoginButton className={s.button} provider="google" />
-      </div>
+      {!me && (
+        <div className={s.actions}>
+          <LoginButton className={s.button} provider="google" />
+        </div>
+      )}
     </div>
   );
 }
 
-export default HomeHero;
+export default createFragmentContainer(HomeHero, {
+  data: graphql`
+    fragment HomeHero_data on Query {
+      me {
+        ...AppBar_me
+        ...AutoUpdater_me
+        ...UserSettingsDialog_me
+      }
+    }
+  `,
+});

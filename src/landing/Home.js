@@ -40,13 +40,7 @@ function Home() {
   return (
     <React.Fragment>
       {/* <HomeSponsors /> */}
-      <Typography className={s.title} variant="h4" gutterBottom>
-        Removing Sponsors
-      </Typography>
       <div className={s.content}>
-        <Typography className={s.title} variant="h4" gutterBottom>
-          Removing Getting Started
-        </Typography>
         {/* <Typography className={s.title} variant="h4" gutterBottom>
           Getting Started
         </Typography>

@@ -10,18 +10,31 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
-import { useLocalContext } from './hooks/LocalContext';
+import LocalLayout from './LocalLayout';
 
 export default function AddExpertise(props) {
-  const { setExpertise, subject, status, setStatus } = useLocalContext();
-
-  React.useEffect(() => () => {
-    // send expertise to backend
+  const { subject } = props;
+  const next = `/new/${subject}/packages`;
+  const help =
+    'Please keep the name of subject concise and to the point. Eg: Use Maths or Chess instead of High School Maths or Professional Chess.';
+  const didyouknow = false;
+  const [status, setStatus] = React.useState(false);
+  const [err, setErr] = React.useState({
+    message: 'Please add expertise',
+    show: false,
   });
+  const [expertise, setExpertise] = React.useState('');
 
   const bigScreen = useMediaQuery('(min-width: 600px)');
 
-  return (
+  function setReady() {
+    setStatus(true);
+  }
+  function checkReady() {
+    return expertise !== null && expertise !== '';
+  }
+
+  const addExpertiseLocal = (
     <Container sx={{ my: bigScreen ? 10 : 3, flexBasis: '100%' }}>
       <Typography variant="caption" align="left" sx={{ fontSize: '1rem' }}>
         Expertise
@@ -65,11 +78,10 @@ export default function AddExpertise(props) {
           id="expertise"
           name="expertise"
           margin="normal"
+          value={expertise}
           onChange={e => {
             setExpertise(e.target.value);
-            if (e.target.value !== null && e.target.value !== '')
-              setStatus({ ...status, expertise: true });
-            else setStatus({ ...status, expertise: false });
+            if (checkReady()) setReady();
           }}
           placeholder={`Example: I have studied Spanish for the last six years. The first three were spent at my high school, where I took every advanced Spanish Course and became President of the Spanish Honor Society.
 
@@ -80,5 +92,13 @@ I am a member of the dual-degree, world-renowned Huntsman Program of Business & 
         />
       </Container>
     </Container>
+  );
+
+  return (
+    <LocalLayout
+      data={{ next, help, didyouknow, err, setErr, status, expertise }}
+    >
+      {addExpertiseLocal}
+    </LocalLayout>
   );
 }

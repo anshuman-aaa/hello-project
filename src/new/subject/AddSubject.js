@@ -11,17 +11,35 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
-import { useLocalContext } from './hooks/LocalContext';
+import LocalLayout from './LocalLayout';
 
 export default function AddSubject(props) {
-  const {
-    suggestedSubjects,
-    setSubject,
-    status,
-    setStatus,
-  } = useLocalContext();
+  const help =
+    ' Keep subject simple Avoid combining multiple subjects into one (e.g., “College essay writing Math Science”) or keeping subject name vague (e.g. “all subjects”).';
+  const didyouknow =
+    'Did you know? You can teach multiple subjects on Lessonpal. However, you can add only one at a time. Add all the details for a subject. Then, you can add other subjects.';
+  const [subject, setSubject] = React.useState('');
+  const [status, setStatus] = React.useState(false);
+  const [err, setErr] = React.useState({
+    message: 'Please add Subject',
+    show: false,
+  });
+  const suggestedSubjects = [
+    'maths',
+    'chemistry',
+    'physics',
+    'vocal music',
+    'yoga',
+    'guitar',
+    'drums',
+    'modern art',
+    'programming',
+    'website development',
+  ];
 
-  return (
+  const next = `/new/${subject}/expertise`;
+
+  const addSubjectLocal = (
     <Container
       sx={{
         my: useMediaQuery('(min-width:600px)') ? 10 : 3,
@@ -31,10 +49,12 @@ export default function AddSubject(props) {
       <Typography variant="caption" align="left" sx={{ fontSize: '1rem' }}>
         Subject
       </Typography>
+
       <Container maxWidth={'sm'} sx={{ my: 2 }}>
         <Typography variant="h4" align="left">
           What do you want to teach?
         </Typography>
+
         <List>
           <ListItem>
             <ListItemIcon>
@@ -58,11 +78,12 @@ export default function AddSubject(props) {
           options={suggestedSubjects}
           id="subject"
           name="subject"
+          value={subject}
           onSelect={e => {
             setSubject(e.target.value);
-            if (e.target.value !== null && e.target.value !== '')
-              setStatus({ ...status, subject: true });
-            else setStatus({ ...status, subject: false });
+            if (e.target.value === null || e.target.value === '')
+              setStatus(false);
+            else setStatus(true);
           }}
           renderInput={params => (
             <TextField
@@ -70,14 +91,22 @@ export default function AddSubject(props) {
               label="Subject Name"
               onChange={e => {
                 setSubject(e.target.value);
-                if (e.target.value !== null && e.target.value !== '')
-                  setStatus({ ...status, subject: true });
-                else setStatus({ ...status, subject: false });
+                if (e.target.value === null || e.target.value === '')
+                  setStatus(false);
+                else setStatus(true);
               }}
             />
           )}
         />
       </Container>
     </Container>
+  );
+
+  return (
+    <LocalLayout
+      data={{ next, help, didyouknow, err, setErr, status, subject }}
+    >
+      {addSubjectLocal}
+    </LocalLayout>
   );
 }

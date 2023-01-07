@@ -1,22 +1,62 @@
 import { Alert, Button } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import React from 'react';
-import { useLocalContext } from './hooks/LocalContext';
 import { useHistory } from '../../hooks';
+// import UpsertSubjectMutation from '../../mutations/UpsertSubject';
 
-export default function LocalMainContent() {
-  const { children, curr, setCurr, err, setErr, status } = useLocalContext();
-  const child = children[curr];
+export default function LocalMainContent(props) {
+  const {
+    children,
+    data,
+    // relay
+  } = props;
+  const {
+    next,
+    err,
+    setErr,
+    status,
+    prev,
+    // subject,
+    // expertise,
+    // packages,
+  } = data;
 
   const history = useHistory();
 
   function ready() {
-    if (status.subject && curr === 0) {
-      return true;
-    } else if (status.expertise && curr === 1) {
-      return true;
-    } else if (status.packages && curr === 2) {
-      return true;
+    console.log(status);
+    return status;
+  }
+
+  function onClickPrev() {
+    history.push(prev);
+  }
+  function onClickNext() {
+    if (ready()) {
+      // UpsertSubjectMutation.commit(
+      //   relay.environment,
+      //   {
+      //     name: subject
+      //     expertise: expertise || '',
+      //     packages: [...packages] || []
+      //   },
+      //   (errors, story) => {
+      //     if (errors) {
+      //       setErr(x => ({
+      //         message:
+      //           'Facing some errors, sending message to backend.  ' +
+      //           err.message,
+      //         show: true,
+      //       }));
+      //     } else {
+      //       props.onClose();
+      //       history.push(`/news/${story.slug}`);
+      //     }
+      //   },
+      // );
+      history.push(next);
+    } else {
+      setErr({ ...err, show: !err.show });
     }
   }
 
@@ -27,8 +67,8 @@ export default function LocalMainContent() {
       flexDirection="column"
       justifyContent="space-between"
     >
-      {child}
-      {err[curr].show === true && (
+      {children}
+      {err.show === true && (
         <Container
           maxWidth="sm"
           sx={{
@@ -39,36 +79,24 @@ export default function LocalMainContent() {
           }}
         >
           <Alert severity="error" sx={{ flexBasis: '100%' }}>
-            {err[curr].message}
+            {err.message}
           </Alert>
         </Container>
       )}
       <Box sx={{ display: 'flex', width: '100%', p: 2 }}>
-        {curr > 0 && (
+        {prev && (
           <Button
             variant="text"
-            onClick={() => setCurr(curr - 1)}
+            onClick={onClickPrev}
             sx={{ display: 'block', marginRight: 'auto' }}
           >
             Previous
           </Button>
         )}
-        {curr < children.length && (
+        {next && (
           <Button
             variant="text"
-            onClick={() => {
-              if (ready()) {
-                if (curr !== children.length - 1) {
-                  setCurr(curr + 1);
-                } else {
-                  history.push('/subjects');
-                }
-              } else {
-                let newerr = [...err];
-                newerr[curr].show = true;
-                setErr(newerr);
-              }
-            }}
+            onClick={onClickNext}
             sx={{ display: 'block', marginLeft: 'auto' }}
           >
             Next

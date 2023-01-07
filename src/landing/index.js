@@ -23,7 +23,7 @@ export default [
     render: ([Home, HomeHero], data, { config }) => ({
       title: config.app.name,
       component: (
-        <Layout data={data} hero={<HomeHero />}>
+        <Layout data={data} hero={<HomeHero me={data} />}>
           <Home data={data} />
         </Layout>
       ),

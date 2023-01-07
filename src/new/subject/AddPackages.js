@@ -9,11 +9,22 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React from 'react';
-import { useLocalContext } from './hooks/LocalContext';
+import LocalLayout from './LocalLayout';
 import Package from './SinglePackage';
 
 export default function AddPackages(props) {
-  const { packages, setPackages, status, setStatus } = useLocalContext();
+  // const { subject } = props;
+  const help =
+    'Please keep the name of subject concise and to the point. Eg: Use Maths or Chess instead of High School Maths or Professional Chess.';
+  const didyouknow = false;
+  const [packages, setPackages] = React.useState([{ lessons: 0, price: 0 }]);
+  const [status, setStatus] = React.useState(false);
+  const [err, setErr] = React.useState({
+    message: 'Please at least one package with under 3 lessons.',
+    show: false,
+  });
+
+  const next = `/subjects`;
 
   function setPackage(val, index, del = false) {
     let newPackages = [...packages];
@@ -41,7 +52,7 @@ export default function AddPackages(props) {
 
   const bigScreen = useMediaQuery('(min-width: 600px)');
 
-  return (
+  const addPackagesLocal = (
     <Container sx={{ my: bigScreen ? 10 : 3, flexBasis: '100%' }}>
       <Typography variant="caption" align="left" sx={{ fontSize: '1rem' }}>
         Packages
@@ -77,5 +88,13 @@ export default function AddPackages(props) {
         </Button>
       </Container>
     </Container>
+  );
+
+  return (
+    <LocalLayout
+      data={{ next, help, didyouknow, err, setErr, status, packages }}
+    >
+      {addPackagesLocal}
+    </LocalLayout>
   );
 }
