@@ -56,7 +56,7 @@ export default function LocalMainContent(props) {
       // );
       history.push(next);
     } else {
-      setErr({ ...err, show: !err.show });
+      setErr({ ...err, show: true });
     }
   }
 

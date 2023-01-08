@@ -63,23 +63,23 @@ type LikeStoryPayload {
 }
 
 type Mutation {
-  # Deletes a user.
-  deleteUser(input: DeleteUserInput!): DeleteUserPayload
-
   # Updates a user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
-  # Marks the story as "liked".
-  likeStory(input: LikeStoryInput!): LikeStoryPayload
+  # Deletes a user.
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
 
   # Creates or updates a story.
   upsertStory(input: UpsertStoryInput!): UpsertStoryPayload
 
-  # Creates a package for a subject.
-  insertPackage(input: InsertPackageInput!): InsertPackagePayload
+  # Marks the story as "liked".
+  likeStory(input: LikeStoryInput!): LikeStoryPayload
 
   # Creates or updates a subject.
   upsertSubject(input: UpsertSubjectInput!): UpsertSubjectPayload
+
+  # Creates a package for a subject.
+  insertPackage(input: InsertPackageInput!): InsertPackagePayload
 }
 
 # An object with an ID
@@ -91,7 +91,7 @@ interface Node {
 type Package implements Node {
   # The ID of an object
   id: ID!
-  subject: undefined
+  subject: Subject!
   lessons: Int!
   price: Int!
   createdAt(format: String): String
@@ -128,8 +128,8 @@ type Query {
   me: User
   user(username: String!): User
   users(after: String, first: Int): UserConnection
-  stories: [Story]
   story(slug: String!): Story
+  stories: [Story]
   subject(slug: String!): Subject
   subjects: [Subject]
 }
