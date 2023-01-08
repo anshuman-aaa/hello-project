@@ -38,6 +38,20 @@ type Identity {
   profileURL: String
 }
 
+input InsertPackageInput {
+  subject_id: ID!
+  id: ID
+  lessons: Int
+  price: Int
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type InsertPackagePayload {
+  package: Package
+  clientMutationId: String
+}
+
 input LikeStoryInput {
   id: ID!
   clientMutationId: String
@@ -49,23 +63,39 @@ type LikeStoryPayload {
 }
 
 type Mutation {
+  # Deletes a user.
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+
   # Updates a user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
-  # Deletes a user.
-  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  # Marks the story as "liked".
+  likeStory(input: LikeStoryInput!): LikeStoryPayload
 
   # Creates or updates a story.
   upsertStory(input: UpsertStoryInput!): UpsertStoryPayload
 
-  # Marks the story as "liked".
-  likeStory(input: LikeStoryInput!): LikeStoryPayload
+  # Creates a package for a subject.
+  insertPackage(input: InsertPackageInput!): InsertPackagePayload
+
+  # Creates or updates a subject.
+  upsertSubject(input: UpsertSubjectInput!): UpsertSubjectPayload
 }
 
 # An object with an ID
 interface Node {
   # The id of the object.
   id: ID!
+}
+
+type Package implements Node {
+  # The ID of an object
+  id: ID!
+  subject: undefined
+  lessons: Int!
+  price: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 # Information about pagination in a connection.
@@ -98,8 +128,10 @@ type Query {
   me: User
   user(username: String!): User
   users(after: String, first: Int): UserConnection
-  story(slug: String!): Story
   stories: [Story]
+  story(slug: String!): Story
+  subject(slug: String!): Subject
+  subjects: [Subject]
 }
 
 type Story implements Node {
@@ -114,6 +146,17 @@ type Story implements Node {
   pointsCount: Int!
   pointGiven: Boolean!
   commentsCount: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
+}
+
+type Subject implements Node {
+  # The ID of an object
+  id: ID!
+  user: User!
+  name: String!
+  expertise(truncate: Int): String
+  packages: [Package]
   createdAt(format: String): String
   updatedAt(format: String): String
 }
@@ -146,6 +189,19 @@ input UpsertStoryInput {
 
 type UpsertStoryPayload {
   story: Story
+  clientMutationId: String
+}
+
+input UpsertSubjectInput {
+  id: ID
+  name: String
+  expertise: String
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type UpsertSubjectPayload {
+  subject: Subject
   clientMutationId: String
 }
 

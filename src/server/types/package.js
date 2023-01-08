@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import { globalIdField } from 'graphql-relay';
 import { GraphQLObjectType, GraphQLNonNull, GraphQLInt } from 'graphql';
 import { SubjectType } from './subject';
@@ -9,7 +8,7 @@ export const PackageType = new GraphQLObjectType({
   name: 'Package',
   interfaces: [nodeInterface],
 
-  fields: {
+  fields: () => ({
     id: globalIdField(),
 
     subject: {
@@ -29,5 +28,5 @@ export const PackageType = new GraphQLObjectType({
 
     createdAt: dateField(self => self.created_at),
     updatedAt: dateField(self => self.updated_at),
-  },
+  }),
 });

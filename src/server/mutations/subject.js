@@ -61,10 +61,6 @@ export const upsertSubject = mutationWithClientMutationId({
         .isRequired()
         .isLength({ min: 3, max: 50 })
 
-        .field('user_id', { trim: true })
-        .isRequired()
-        .isLength({ min: 3, max: 50 })
-
         .field('expertise', { trim: true })
         .isLength({ min: 10, max: 1000 }),
     );
@@ -120,7 +116,7 @@ export const insertPackage = mutationWithClientMutationId({
       throw new Error(`Cannot find the subject # ${id}.`);
     }
 
-    // Only the author of the story or admins can edit it
+    // Only the teacher of the subject or admins can edit it
     ctx.ensureIsAuthorized(user => subject.user_id === user.id || user.isAdmin);
 
     // Validate and sanitize user input

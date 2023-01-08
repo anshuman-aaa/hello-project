@@ -9,4 +9,4 @@ export * from './identity';
 export * from './story';
 export * from './comment';
 export * from './subject';
-export * from './package_subject';
+export * from './package';

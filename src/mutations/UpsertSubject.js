@@ -9,9 +9,10 @@ function commit(environment, input, done) {
             id
             name
             expertise
-            packages
-            createdAt
-            updatedAt
+            packages {
+              lessons
+              price
+            }
           }
         }
       }

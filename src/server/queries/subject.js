@@ -37,7 +37,7 @@ export const subjects = {
   resolve(self, args, ctx) {
     return db
       .table('subjects')
-      .where({ subject_id: ctx.user ? ctx.user.id : null })
+      .where({ user_id: ctx.user ? ctx.user.id : null })
       .orderBy('created_at', 'desc')
       .limit(100)
       .select();

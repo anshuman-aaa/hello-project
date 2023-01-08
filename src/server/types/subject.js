@@ -9,7 +9,7 @@ import {
 } from 'graphql';
 
 import { UserType } from './user';
-import { PackageType } from './package_subject';
+import { PackageType } from './package';
 import { nodeInterface } from '../node';
 import { dateField } from '../utils';
 
@@ -17,7 +17,7 @@ export const SubjectType = new GraphQLObjectType({
   name: 'Subject',
   interfaces: [nodeInterface],
 
-  fields: {
+  fields: () => ({
     id: globalIdField(),
 
     user: {
@@ -32,7 +32,7 @@ export const SubjectType = new GraphQLObjectType({
     },
 
     expertise: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       args: {
         truncate: { type: GraphQLInt },
       },
@@ -52,5 +52,5 @@ export const SubjectType = new GraphQLObjectType({
 
     createdAt: dateField(self => self.created_at),
     updatedAt: dateField(self => self.updated_at),
-  },
+  }),
 });

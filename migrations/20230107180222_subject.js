@@ -22,18 +22,18 @@ exports.up = async db => {
 
   await db.schema.createTable('packages', table => {
     table
+      .uuid('id')
+      .notNullable()
+      .primary();
+    table
       .uuid('subject_id')
       .notNullable()
       .references('id')
       .inTable('subjects')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    table
-      .uuid('id')
-      .notNullable()
-      .primary();
-    table.integer('lessons');
-    table.integer('price');
+    table.integer('lessons').notNullable();
+    table.integer('price').notNullable();
     table
       .timestamp('created_at')
       .notNullable()
