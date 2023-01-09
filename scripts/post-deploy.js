@@ -14,6 +14,7 @@ const urls = [
   '/',
   '/about',
   '/news',
+  '/subject',
   '/submit',
   '/account',
   '/privacy',
