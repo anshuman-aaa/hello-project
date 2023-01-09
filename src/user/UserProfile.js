@@ -49,14 +49,13 @@ function UserProfile(props) {
   );
 }
 
-export default createFragmentContainer(
-  UserProfile,
-  graphql`
-    fragment UserProfile on User {
+export default createFragmentContainer(UserProfile, {
+  data: graphql`
+    fragment UserProfile_data on User {
       id
       username
       displayName
       photoURL
     }
   `,
-);
+});

@@ -97,6 +97,11 @@ function AppBar(props) {
             </Button>
             {children}
             {me && (
+              <Button color="inherit" component={Link} href="/subjects">
+                Subjects
+              </Button>
+            )}
+            {me && (
               <IconButton
                 className={s.avatarButton}
                 onClick={openUserMenu}

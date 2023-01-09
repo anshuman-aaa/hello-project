@@ -27,7 +27,7 @@ export default [
         ...Layout_data
         user(username: $username) {
           displayName
-          ...UserProfile
+          ...UserProfile_data
         }
       }
     `,
@@ -47,7 +47,7 @@ export default [
     query: graphql`
       query userQuery {
         ...Layout_data
-        ...Account
+        ...Account_data
       }
     `,
     render: ([Account], data, { config }) => ({
