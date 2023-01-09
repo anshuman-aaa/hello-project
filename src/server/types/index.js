@@ -8,3 +8,4 @@ export * from './user';
 export * from './identity';
 export * from './story';
 export * from './comment';
+export * from './lesson';
