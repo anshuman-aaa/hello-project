@@ -48,7 +48,7 @@ function UserMenu(props) {
         className: clsx(s.list, className),
         dense: true,
       }}
-      getContentAnchorEl={undefined}
+      // getContentAnchorEl={undefined}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',

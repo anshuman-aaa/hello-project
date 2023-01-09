@@ -1,3 +1,17 @@
+input AddSubjectInput {
+  id: ID
+  subject: String
+  expertise: String
+  price: Float
+  num_of_lessons: Int
+  clientMutationId: String
+}
+
+type AddSubjectPayload {
+  subject: Subject
+  clientMutationId: String
+}
+
 enum AuthenticationProvider {
   GOOGLE
   TWITTER
@@ -15,6 +29,16 @@ type Comment implements Node {
   pointsCount: Int!
   createdAt(format: String): String
   updatedAt(format: String): String
+}
+
+input DeleteSubjectInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSubjectPayload {
+  deletesubjectid: String
+  clientMutationId: String
 }
 
 input DeleteUserInput {
@@ -60,6 +84,12 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Add new Subject
+  AddSubject(input: AddSubjectInput!): AddSubjectPayload
+
+  # deletes a subject
+  DeleteSubject(input: DeleteSubjectInput!): DeleteSubjectPayload
 }
 
 # An object with an ID
@@ -100,6 +130,7 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
+  allsubject: [Subject]
 }
 
 type Story implements Node {
@@ -114,6 +145,18 @@ type Story implements Node {
   pointsCount: Int!
   pointGiven: Boolean!
   commentsCount: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
+}
+
+type Subject {
+  # The ID of an object
+  id: ID!
+  user: User!
+  subject: String!
+  expertise: String!
+  price: String!
+  num_of_lessons: String!
   createdAt(format: String): String
   updatedAt(format: String): String
 }

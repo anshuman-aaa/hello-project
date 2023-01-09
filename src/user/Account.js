@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function Account(props) {
   const s = useStyles();
-
+  //   console.log(props);
   return (
     <div className={s.container}>
       <Card className={s.content}>
@@ -32,17 +32,16 @@ function Account(props) {
           My Account
         </Typography>
         <Typography paragraph>
-          Welcome, {props.user && props.user.displayName}!
+          Welcome, {props.data.me && props.data.me.displayName}!
         </Typography>
       </Card>
     </div>
   );
 }
 
-export default createFragmentContainer(
-  Account,
-  graphql`
-    fragment Account on Query {
+export default createFragmentContainer(Account, {
+  data: graphql`
+    fragment Account_data on Query {
       me {
         id
         username
@@ -51,4 +50,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

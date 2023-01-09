@@ -33,9 +33,12 @@ function LoginForm(props) {
 
   function signIn(event) {
     const { provider } = event.currentTarget.dataset;
-    auth.signInWith(provider).then(user => {
-      onLoginComplete(user);
-    });
+    auth
+      .signInWith(provider)
+      .then(user => {
+        onLoginComplete(user);
+      })
+      .catch(err => console.log(err));
   }
 
   return (
