@@ -189,4 +189,12 @@ export class Context {
       .select()
       .then(mapTo(keys, x => x.id)),
   );
+
+  packagesById = new DataLoader(keys =>
+    db
+      .table('packages')
+      .whereIn('id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
 }

@@ -130,7 +130,6 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
-  subject(slug: String!): Subject
   subjects: [Subject]
 }
 

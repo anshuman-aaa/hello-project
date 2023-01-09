@@ -1,25 +1,14 @@
 import { Alert, Button } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { useHistory } from '../../hooks';
-// import UpsertSubjectMutation from '../../mutations/UpsertSubject';
+import UpsertSubjectMutation from '../../mutations/UpsertSubject';
 
-export default function LocalMainContent(props) {
-  const {
-    children,
-    data,
-    // relay
-  } = props;
-  const {
-    next,
-    err,
-    setErr,
-    status,
-    prev,
-    // subject,
-    // expertise,
-    // packages,
-  } = data;
+function LocalMainContent(props) {
+  const { children, localdata, relay, subjectList } = props;
+  console.log(subjectList);
+  const { next, err, setErr, status, prev, subject, expertise } = localdata;
 
   const history = useHistory();
 
@@ -33,27 +22,27 @@ export default function LocalMainContent(props) {
   }
   function onClickNext() {
     if (ready()) {
-      // UpsertSubjectMutation.commit(
-      //   relay.environment,
-      //   {
-      //     name: subject
-      //     expertise: expertise || '',
-      //     packages: [...packages] || []
-      //   },
-      //   (errors, story) => {
-      //     if (errors) {
-      //       setErr(x => ({
-      //         message:
-      //           'Facing some errors, sending message to backend.  ' +
-      //           err.message,
-      //         show: true,
-      //       }));
-      //     } else {
-      //       props.onClose();
-      //       history.push(`/news/${story.slug}`);
-      //     }
-      //   },
-      // );
+      UpsertSubjectMutation.commit(
+        relay.environment,
+        {
+          name: subject,
+          expertise: expertise || '',
+          // packages: [...packages] || [],
+        },
+        (errors, story) => {
+          if (errors) {
+            setErr(x => ({
+              message:
+                'Facing some errors, sending message to backend.  ' +
+                err.message,
+              show: true,
+            }));
+          } else {
+            props.onClose();
+            history.push(`/news/${story.slug}`);
+          }
+        },
+      );
       history.push(next);
     } else {
       setErr({ ...err, show: true });
@@ -106,3 +95,13 @@ export default function LocalMainContent(props) {
     </Box>
   );
 }
+
+export default createFragmentContainer(LocalMainContent, {
+  subjectList: graphql`
+    fragment LocalMainContent_subjectList on Subject {
+      id
+      name
+      expertise
+    }
+  `,
+});

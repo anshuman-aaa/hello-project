@@ -12,8 +12,10 @@ import {
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
 import LocalLayout from './LocalLayout';
+import { createFragmentContainer, graphql } from 'react-relay';
 
-export default function AddSubject(props) {
+function AddSubject(props) {
+  const { backend_data } = props;
   const help =
     ' Keep subject simple Avoid combining multiple subjects into one (e.g., “College essay writing Math Science”) or keeping subject name vague (e.g. “all subjects”).';
   const didyouknow =
@@ -104,9 +106,18 @@ export default function AddSubject(props) {
 
   return (
     <LocalLayout
-      data={{ next, help, didyouknow, err, setErr, status, subject }}
+      localdata={{ next, help, didyouknow, err, setErr, status, subject }}
+      backend_data={backend_data}
     >
       {addSubjectLocal}
     </LocalLayout>
   );
 }
+
+export default createFragmentContainer(AddSubject, {
+  backend_data: graphql`
+    fragment AddSubject_backend_data on Query {
+      ...LocalLayout_backend_data
+    }
+  `,
+});
