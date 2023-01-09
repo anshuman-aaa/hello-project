@@ -12,6 +12,8 @@ import legal from './legal';
 import misc from './misc';
 import user from './user';
 import news from './news';
+import subjects from './subjects';
+import AddedLessons from './AddedLessons';
 
 const routes = [
   ...landing,
@@ -19,6 +21,8 @@ const routes = [
   ...misc,
   ...user,
   ...news,
+  ...subjects,
+  ...AddedLessons,
   {
     path: '/admin',
     children: () => import(/* webpackChunkName: 'admin' */ './admin'),

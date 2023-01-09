@@ -1,3 +1,18 @@
+input addLessonInput {
+  id: Int
+  subject: String
+  price: Int
+  numlesson: Int
+  duration: Int
+  expertise: String
+  clientMutationId: String
+}
+
+type addLessonPayload {
+  subject: String
+  clientMutationId: String
+}
+
 enum AuthenticationProvider {
   GOOGLE
   TWITTER
@@ -27,6 +42,11 @@ type DeleteUserPayload {
   clientMutationId: String
 }
 
+type Dummy {
+  text: String
+  id: Int
+}
+
 type Identity {
   # The ID of an object
   id: ID!
@@ -36,6 +56,20 @@ type Identity {
   displayName: String
   photoURL: String
   profileURL: String
+}
+
+type Lesson implements Node {
+  # The ID of an object
+  id: ID!
+  subject: String
+  price: Int
+  numlesson: Int
+  duration: Int
+  expertise: String
+  user: User!
+  createdAt(format: String): String
+  updatedAt(format: String): String
+  lastLoginAt(format: String): String
 }
 
 input LikeStoryInput {
@@ -60,6 +94,9 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Adds Lessons
+  addLesson(input: addLessonInput!): addLessonPayload
 }
 
 # An object with an ID
@@ -98,8 +135,10 @@ type Query {
   me: User
   user(username: String!): User
   users(after: String, first: Int): UserConnection
+  getRandom(text: String): Dummy
   story(slug: String!): Story
   stories: [Story]
+  getLessons: [Lesson]
 }
 
 type Story implements Node {

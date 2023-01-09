@@ -4,7 +4,12 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { GraphQLNonNull, GraphQLString } from 'graphql';
+import {
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+} from 'graphql';
 import {
   connectionDefinitions,
   forwardConnectionArgs,
@@ -73,5 +78,27 @@ export const users = {
       }),
       query,
     };
+  },
+};
+
+const dummy = new GraphQLObjectType({
+  name: 'Dummy',
+  fields: {
+    text: {
+      type: GraphQLString,
+    },
+    id: {
+      type: GraphQLInt,
+    },
+  },
+});
+
+export const getRandom = {
+  type: dummy,
+  args: {
+    text: { type: GraphQLString },
+  },
+  async resolve() {
+    return await db.table('hello_project').select('*');
   },
 };

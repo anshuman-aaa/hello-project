@@ -70,6 +70,17 @@ exports.up = async db => {
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.primary(['comment_id', 'user_id']);
   });
+
+  await db.schema.createTable('lessons',table=>
+  {
+    table.integer('id').notNullable();
+    table.text('subject');
+    table.integer('price');
+    table.integer('numlesson');
+    table.integer('duration');
+    table.text('expertise');
+    table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+  })
 };
 
 exports.down = async db => {
@@ -80,4 +91,5 @@ exports.down = async db => {
   await db.schema.dropTableIfExists('user_identities');
   await db.schema.dropTableIfExists('user_tokens');
   await db.schema.dropTableIfExists('users');
+  await db.schema.dropTableIfExists('lessons');
 };
