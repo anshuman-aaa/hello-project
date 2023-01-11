@@ -39,8 +39,6 @@ function AddSubject(props) {
     'website development',
   ];
 
-  const next = `/new/${subject}/expertise`;
-
   const addSubjectLocal = (
     <Container
       sx={{
@@ -106,7 +104,7 @@ function AddSubject(props) {
 
   return (
     <LocalLayout
-      localdata={{ next, help, didyouknow, err, setErr, status, subject }}
+      localdata={{ help, didyouknow, err, setErr, status, subject }}
       backend_data={backend_data}
     >
       {addSubjectLocal}
