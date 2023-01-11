@@ -131,6 +131,7 @@ type Query {
   story(slug: String!): Story
   stories: [Story]
   subjects: [Subject]
+  packages(subject_id: ID!): [Package]
 }
 
 type Story implements Node {

@@ -7,3 +7,4 @@
 export * from './user';
 export * from './story';
 export * from './subject';
+export * from './package';
