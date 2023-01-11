@@ -173,4 +173,20 @@ export class Context {
         ),
       );
   });
+
+  subjectById = new DataLoader(keys =>
+    db
+      .table('subjects')
+      .whereIn('id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
+
+  packageById = new DataLoader(keys =>
+    db
+      .table('packages')
+      .whereIn('id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
 }

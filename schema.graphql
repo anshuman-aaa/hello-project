@@ -38,6 +38,20 @@ type Identity {
   profileURL: String
 }
 
+input InsertPackageInput {
+  subject_id: ID!
+  id: ID
+  lessons: Int
+  price: Int
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type InsertPackagePayload {
+  package: Package
+  clientMutationId: String
+}
+
 input LikeStoryInput {
   id: ID!
   clientMutationId: String
@@ -60,12 +74,28 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Creates or updates a subject.
+  upsertSubject(input: UpsertSubjectInput!): UpsertSubjectPayload
+
+  # Creates a package for a subject.
+  insertPackage(input: InsertPackageInput!): InsertPackagePayload
 }
 
 # An object with an ID
 interface Node {
   # The id of the object.
   id: ID!
+}
+
+type Package implements Node {
+  # The ID of an object
+  id: ID!
+  subject: Subject!
+  lessons: Int!
+  price: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 # Information about pagination in a connection.
@@ -100,6 +130,7 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
+  subjects: [Subject]
 }
 
 type Story implements Node {
@@ -114,6 +145,17 @@ type Story implements Node {
   pointsCount: Int!
   pointGiven: Boolean!
   commentsCount: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
+}
+
+type Subject implements Node {
+  # The ID of an object
+  id: ID!
+  user: User!
+  name: String!
+  expertise(truncate: Int): String
+  packages: [Package]
   createdAt(format: String): String
   updatedAt(format: String): String
 }
@@ -146,6 +188,19 @@ input UpsertStoryInput {
 
 type UpsertStoryPayload {
   story: Story
+  clientMutationId: String
+}
+
+input UpsertSubjectInput {
+  id: ID
+  name: String
+  expertise: String
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type UpsertSubjectPayload {
+  subject: Subject
   clientMutationId: String
 }
 
