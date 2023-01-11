@@ -4,7 +4,11 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-export * from './user';
-export * from './story';
-export * from './subject';
-export * from './package';
+import subject from './subject';
+
+export default [
+  {
+    path: '/new',
+    children: [...subject],
+  },
+];

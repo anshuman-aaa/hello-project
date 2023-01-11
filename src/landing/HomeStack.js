@@ -45,8 +45,9 @@ function HomeStack() {
         </Typography>
         <Typography className={s.desc}>
           Everything that you need for building an API with{' '}
-          <ExtLink>Knex.js</ExtLink> and <ExtLink>GraphQL.js</ExtLink>. Check
-          out <a href="/graphql">GraphiQL IDE</a> and{' '}
+          <ExtLink>Knex.js</ExtLink> and <ExtLink>GraphQL.js</ExtLink>.
+          <br />
+          Check out <a href="/graphql">GraphiQL IDE</a> and{' '}
           <a href="/graphql/model">data model</a>.
         </Typography>
       </Grid>

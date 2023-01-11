@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 
 import LoginButton from '../common/LoginButton';
+import { Link } from '@mui/material';
+import { graphql } from 'relay-runtime';
+import { createFragmentContainer } from 'react-relay';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,23 +53,38 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function HomeHero() {
+function HomeHero(props) {
+  const { me } = props;
   const s = useStyles();
-
+  console.log(me);
   return (
     <div className={s.root}>
       <Typography className={s.title} variant="h3">
-        Flying start for makers
+        Jagteshver's Assignment
       </Typography>
       <Typography className={s.subTitle} variant="h5">
-        Quickly bootstrap new web application projects on a solid
-        JavaScript-based tech stack and serverless architecture
+        Bootstrapped from{' '}
+        <Link href="https://github.com/kriasoft/react-firebase-starter">
+          Kriasoft's React Firebase Starter Kit
+        </Link>
       </Typography>
-      <div className={s.actions}>
-        <LoginButton className={s.button} provider="google" />
-      </div>
+      {!me && (
+        <div className={s.actions}>
+          <LoginButton className={s.button} provider="google" />
+        </div>
+      )}
     </div>
   );
 }
 
-export default HomeHero;
+export default createFragmentContainer(HomeHero, {
+  data: graphql`
+    fragment HomeHero_data on Query {
+      me {
+        ...AppBar_me
+        ...AutoUpdater_me
+        ...UserSettingsDialog_me
+      }
+    }
+  `,
+});
