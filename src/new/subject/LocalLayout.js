@@ -11,7 +11,7 @@ function LocalLayout(props) {
       <LocalMainContent
         localdata={{ ...localdata }}
         err={{ ...localdata }}
-        subjectList={backend_data}
+        subjectList={backend_data.subjects}
       >
         {children}
       </LocalMainContent>
@@ -20,11 +20,12 @@ function LocalLayout(props) {
   );
 }
 
-// export default LocalLayout;
 export default createFragmentContainer(LocalLayout, {
   backend_data: graphql`
     fragment LocalLayout_backend_data on Query {
-      ...LocalMainContent_subjectList
+      subjects {
+        ...LocalMainContent_subjectList
+      }
     }
   `,
 });

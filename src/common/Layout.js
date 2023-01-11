@@ -12,6 +12,7 @@ import AppBar from './AppBar';
 import LayoutFooter from './LayoutFooter';
 import AutoUpdater from './AutoUpdater';
 import UserSettingsDialog from './UserSettingsDialog';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -37,21 +38,30 @@ function Layout(props) {
   }
 
   return (
-    <React.Fragment>
-      <AppBar
-        me={data.me}
-        {...(!hero && { className: s.background })}
-        onOpenSettings={openUserSettings}
-      />
-      {hero && (
-        <div className={s.background}>
-          <div className={s.toolbar} />
-          {hero}
-        </div>
-      )}
-      {!hero && <div className={s.toolbar} />}
-      {children}
-      <LayoutFooter />
+    <>
+      <Box
+        display="flex"
+        height="100vh"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
+        <AppBar
+          me={data.me}
+          {...(!hero && { className: s.background })}
+          onOpenSettings={openUserSettings}
+        />
+        {hero && (
+          <div className={s.background}>
+            <div className={s.toolbar} />
+            {hero}
+          </div>
+        )}
+        {!hero && <div className={s.toolbar} />}
+        <Box display="flex" flexBasis="100%" flexDirection="column">
+          {children}
+        </Box>
+        <LayoutFooter />
+      </Box>
       <AutoUpdater me={data.me} />
       <UserSettingsDialog
         key={userSettings.key}
@@ -59,7 +69,7 @@ function Layout(props) {
         onClose={closeUserSettings}
         me={data.me}
       />
-    </React.Fragment>
+    </>
   );
 }
 

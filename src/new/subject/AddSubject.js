@@ -39,7 +39,7 @@ function AddSubject(props) {
     'website development',
   ];
 
-  const next = `expertise`;
+  const next = `/new/${subject}/expertise`;
 
   const addSubjectLocal = (
     <Container

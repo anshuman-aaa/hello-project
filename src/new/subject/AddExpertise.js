@@ -11,11 +11,10 @@ import {
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
 import LocalLayout from './LocalLayout';
-import { createFragmentContainer, graphql } from 'react-relay';
 
-function AddExpertise(props) {
-  const { subject: subjectID, backend_data } = props;
-  const next = `packages`;
+export default function AddExpertise(props) {
+  const { subject } = props;
+  const next = `/new/${subject}/packages`;
   const help =
     'Please keep the name of subject concise and to the point. Eg: Use Maths or Chess instead of High School Maths or Professional Chess.';
   const didyouknow = false;
@@ -42,7 +41,7 @@ function AddExpertise(props) {
       </Typography>
       <Container maxWidth={'sm'} sx={{ my: 2 }}>
         <Typography variant="h4" align="left">
-          Describe your qualifications for teaching {subjectID}
+          Describe your qualifications for teaching {subject}
         </Typography>
         <List>
           <ListItem>
@@ -50,7 +49,7 @@ function AddExpertise(props) {
               <ArrowRight />
             </ListItemIcon>
             <ListItemText
-              primary={`Why should students choose you as their ${subjectID} tutor?`}
+              primary={`Why should students choose you as their ${subject} tutor?`}
             />
           </ListItem>
           <ListItem>
@@ -58,7 +57,7 @@ function AddExpertise(props) {
               <ArrowRight />
             </ListItemIcon>
             <ListItemText
-              primary={`Be specific and share details about your ${subjectID} expertise.`}
+              primary={`Be specific and share details about your ${subject} expertise.`}
             />
           </ListItem>
           <ListItem>
@@ -97,27 +96,9 @@ I am a member of the dual-degree, world-renowned Huntsman Program of Business & 
 
   return (
     <LocalLayout
-      localdata={{
-        next,
-        help,
-        didyouknow,
-        err,
-        setErr,
-        status,
-        expertise,
-        subjectID,
-      }}
-      backend_data={backend_data}
+      data={{ next, help, didyouknow, err, setErr, status, expertise }}
     >
       {addExpertiseLocal}
     </LocalLayout>
   );
 }
-
-export default createFragmentContainer(AddExpertise, {
-  backend_data: graphql`
-    fragment AddExpertise_backend_data on Query {
-      ...LocalLayout_backend_data
-    }
-  `,
-});

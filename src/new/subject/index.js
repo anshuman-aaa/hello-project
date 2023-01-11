@@ -4,7 +4,7 @@ import Layout from '../../common/Layout';
 
 export default [
   {
-    path: '/subject',
+    path: '/:subject',
     components: () => [
       import(/* webpackChunkName: 'new-subject' */ './AddSubject'),
     ],
@@ -33,13 +33,12 @@ export default [
       title: config.app.name,
       component: (
         <Layout data={data}>
-          <AddExpertise subject={variables.subject} backend_data={data} />
+          <AddExpertise subject={variables.subject} />
         </Layout>
       ),
     }),
     query: graphql`
       query subjectAddExpertiseQuery {
-        ...AddExpertise_backend_data
         ...Layout_data
       }
     `,
@@ -53,13 +52,12 @@ export default [
       title: config.app.name,
       component: (
         <Layout data={data}>
-          <AddPackages subject={variables.subject} backend_data={data} />
+          <AddPackages subject={variables.subject} />
         </Layout>
       ),
     }),
     query: graphql`
       query subjectAddPackagesQuery {
-        ...AddPackages_backend_data
         ...Layout_data
       }
     `,

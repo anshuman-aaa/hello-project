@@ -1,5 +1,6 @@
 import React from 'react';
 import makeStyles from '@mui/styles/makeStyles';
+import { Typography } from '@mui/material';
 
 const sponsors = [
   {
@@ -41,6 +42,7 @@ function HomeSponsors() {
 
   return (
     <div className={s.root}>
+      <Typography variant="h4">Removing Sponsors</Typography>
       {sponsors.map(x => (
         <a
           key={x.name}

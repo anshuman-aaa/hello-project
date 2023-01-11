@@ -9,12 +9,11 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
 import LocalLayout from './LocalLayout';
 import Package from './SinglePackage';
 
-function AddPackages(props) {
-  const { subject: subjectID, backend_data } = props;
+export default function AddPackages(props) {
+  // const { subject } = props;
   const help =
     'Please keep the name of subject concise and to the point. Eg: Use Maths or Chess instead of High School Maths or Professional Chess.';
   const didyouknow = false;
@@ -24,6 +23,8 @@ function AddPackages(props) {
     message: 'Please at least one package with under 3 lessons.',
     show: false,
   });
+
+  const next = `/subjects`;
 
   function setPackage(val, index, del = false) {
     let newPackages = [...packages];
@@ -91,26 +92,9 @@ function AddPackages(props) {
 
   return (
     <LocalLayout
-      localdata={{
-        help,
-        didyouknow,
-        err,
-        setErr,
-        status,
-        packages,
-        subjectID,
-      }}
-      backend_data={backend_data}
+      data={{ next, help, didyouknow, err, setErr, status, packages }}
     >
       {addPackagesLocal}
     </LocalLayout>
   );
 }
-
-export default createFragmentContainer(AddPackages, {
-  backend_data: graphql`
-    fragment AddPackages_backend_data on Query {
-      ...LocalLayout_backend_data
-    }
-  `,
-});

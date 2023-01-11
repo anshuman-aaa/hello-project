@@ -182,7 +182,15 @@ export class Context {
       .then(mapTo(keys, x => x.id)),
   );
 
-  packageById = new DataLoader(keys =>
+  packagesBySubjectId = new DataLoader(keys =>
+    db
+      .table('packages')
+      .whereIn('subject_id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
+
+  packagesById = new DataLoader(keys =>
     db
       .table('packages')
       .whereIn('id', keys)

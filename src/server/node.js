@@ -21,9 +21,9 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
       case 'Comment':
         return context.commentById.load(id).then(assignType('Comment'));
       case 'Subject':
-        return context.subjectById.load(id).then(assignType('Subject'));
+        return context.subjectsById.load(id).then(assignType('Subject'));
       case 'Package':
-        return context.packageById.load(id).then(assignType('Package'));
+        return context.subjectsById.load(id).then(assignType('Package'));
       default:
         return null;
     }
@@ -37,7 +37,7 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
       case 'Comment':
         return require('./types').CommentType;
       case 'Subject':
-        return require('./types').SubjectType;
+        return require('./types').SubejctType;
       case 'Package':
         return require('./types').PackageType;
       default:
