@@ -121,6 +121,14 @@ export class Context {
       .then(mapTo(keys, x => x.id)),
   );
 
+  subjectById = new DataLoader(keys =>
+    db
+      .table('subjects')
+      .whereIn('id', keys)
+      .select()
+      .then(mapTo(keys, x => x.id)),
+  );
+
   storyBySlug = new DataLoader(keys =>
     db
       .table('stories')

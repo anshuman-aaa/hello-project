@@ -50,6 +50,17 @@ exports.up = async db => {
     table.timestamps(false, true);
   });
 
+
+  await db.schema.createTable('subjects', table => {
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    // table.uuid('author_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.string('sub', 120).notNullable();
+    table.integer('price', 120).notNullable();
+    table.integer('lesson', 2000).notNullable();
+    table.string('expertise').notNullable();
+    table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+  });
+
   await db.schema.createTable('story_points', table => {
     table.uuid('story_id').references('id').inTable('stories').onDelete('CASCADE').onUpdate('CASCADE');
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
@@ -73,6 +84,7 @@ exports.up = async db => {
 };
 
 exports.down = async db => {
+  await db.schema.dropTableIfExists('subjects');
   await db.schema.dropTableIfExists('comment_points');
   await db.schema.dropTableIfExists('comments');
   await db.schema.dropTableIfExists('story_points');

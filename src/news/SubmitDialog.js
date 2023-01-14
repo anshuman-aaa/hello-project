@@ -26,12 +26,17 @@ const initialState = {
 };
 
 function SubmitDialog(props) {
+  // console.log(props)
   const { me, relay } = props;
+  // console.log("me: ",me);
   const [state, setState] = React.useState({ ...initialState });
+  // console.log(state)
   const history = useHistory();
+  // console.log(history )
   const auth = useAuth();
 
   function handleSubmit(event) {
+    // console.log("event prints here",event)
     event.preventDefault();
     setState(x => ({ ...x, loading: true, errors: null }));
     UpsertStoryMutation.commit(

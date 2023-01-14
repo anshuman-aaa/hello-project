@@ -71,13 +71,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function News(props) {
+  // console.log(props)
   const { data, relay } = props;
+  console.log('wfqwf', data);
+  // console.log(relay);
   const { stories } = data;
   const self = React.useRef({});
   const [dialog, setDialog] = React.useState({ open: false });
   const [error, setError] = React.useState();
   const auth = useAuth();
   const s = useStyles();
+  console.log(s);
 
   // Retry the last mutation after the user signs in
   React.useEffect(() => {

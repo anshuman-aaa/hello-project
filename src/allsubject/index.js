@@ -5,24 +5,26 @@ import Layout from '../common/Layout';
 
 export default [
   {
-    path: '/subject',
+    path: '/allsubject',
     query: graphql`
-      query subjectQuery {
+      query allsubjectAllSubjectQuery {
         ...Layout_data
-        ...FinalPage_data
+        ...AllSubject_data
       }
     `,
-    components: () => [import(/* webpackChunkName: 'subject' */ './FinalPage')],
+    components: () => [
+      import(/* webpackChunkName: 'allsubject' */ './AllSubject'),
+    ],
     // query: graphql`
     // `,
-    render: ([FinalPage], data, { config }) => ({
+    render: ([AllSubject], data, { config }) => ({
       // title: `Subject • ${config.app.name}`,
       component: (
         <Layout data={data}>
-          <FinalPage data={data} />
+          <AllSubject data={data} />
         </Layout>
       ),
-      chunks: ['subject'],
+      chunks: ['allsubject'],
     }),
   },
 ];

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-// import { Card } from '@mui/material';
-// import { Typography } from '@mui/material';
-// import { TextField } from '@mui/material';
 import Subject from './Subject';
 import Expertise from './Expertise';
 import Confirm from './Confirm';
 
-function Combine() {
+function Combine(props) {
   const [data, setData] = useState({
     subject: '',
     price: '',
@@ -33,7 +30,12 @@ function Combine() {
         <Expertise data={data} setData={setData} handlePage={handlePage} />
       ) : null}
       {page === 3 ? (
-        <Confirm data={data} setData={setData} handlePage={handlePage} />
+        <Confirm
+          data_data={props.data}
+          data={data}
+          setData={setData}
+          handlePage={handlePage}
+        />
       ) : null}
     </>
   );

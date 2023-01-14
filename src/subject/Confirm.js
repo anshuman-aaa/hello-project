@@ -11,22 +11,40 @@ import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import { Chip } from '@mui/material';
 import { InputAdornment } from '@mui/material';
+import { useHistory, useRelay } from '../hooks';
+import UpsertSubjectMutation from '../mutations/UpsertSubject';
 // import e from 'express';
 
 // import { createFragmentContainer} from 'react-relay';
 
-function Confirm({ data, setData, handlePage }) {
-  // const [skills, setSkills] = useState(data.expertise);
-  // const handleDelete = (chip) => {
-  //   var array = data.expertise
-  //   var chip_array = array.filter((data) => data !== chip  );
-  //   setSkills(chip_array)
-  //   data.expertise = chip_array
-  //   console.log(chip)
-  //   console.log(chip_array)
-  // }
+function Confirm(props) {
+  console.log(props);
+  // const { me } = props;
+  const [state, setState] = React.useState({ ...props.data });
+  const history = useHistory();
+  const relay = useRelay();
+  console.log(props);
 
-  // const [exp, setExp] = useState();
+  function handleSubmit(event) {
+    event.preventDefault();
+    UpsertSubjectMutation.commit(
+      relay.environment,
+      {
+        sub: state.subject || '',
+        price: parseInt(state.price || null),
+        lesson: parseInt(state.lesson || null),
+        expertise: state.expertise.join(',') || '',
+      },
+      (errors, story) => {
+        if (errors) {
+          setState(x => ({ ...x }));
+        } else {
+          // props.onClose();
+          history.push(`/subject`);
+        }
+      },
+    );
+  }
 
   return (
     <Card
@@ -51,7 +69,7 @@ function Confirm({ data, setData, handlePage }) {
       <Typography>
         <TextField
           label="Subject"
-          defaultValue={data.subject}
+          defaultValue={props.data.subject}
           InputProps={{
             readOnly: true,
           }}
@@ -59,7 +77,7 @@ function Confirm({ data, setData, handlePage }) {
 
         <TextField
           label="price-per-lesson"
-          defaultValue={data.price}
+          defaultValue={props.data.price}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             readOnly: true,
@@ -68,7 +86,7 @@ function Confirm({ data, setData, handlePage }) {
 
         <TextField
           label="Number of Lessons"
-          defaultValue={data.lesson}
+          defaultValue={props.data.lesson}
           InputProps={{
             readOnly: true,
           }}
@@ -86,7 +104,7 @@ function Confirm({ data, setData, handlePage }) {
       </Typography>
 
       <Typography>
-        {data.expertise.map(skill => (
+        {props.data.expertise.map(skill => (
           <Chip label={skill} />
         ))}
       </Typography>
@@ -98,7 +116,7 @@ function Confirm({ data, setData, handlePage }) {
             position: 'absolute',
             marginTop: '60px',
           }}
-          onClick={() => handlePage('previous')}
+          onClick={() => props.handlePage('previous')}
         >
           Pervious
         </Button>
@@ -111,6 +129,7 @@ function Confirm({ data, setData, handlePage }) {
             marginTop: '60px',
             marginLeft: '-100px',
           }}
+          onClick={handleSubmit}
         >
           Submit
         </Button>
