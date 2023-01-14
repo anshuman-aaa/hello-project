@@ -40,7 +40,7 @@ function Confirm(props) {
           setState(x => ({ ...x }));
         } else {
           // props.onClose();
-          history.push(`/subject`);
+          history.push(`/allsubject`);
         }
       },
     );
