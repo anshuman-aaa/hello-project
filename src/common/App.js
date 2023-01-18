@@ -15,6 +15,7 @@ import ErrorPage from './ErrorPage';
 import LoginDialog from './LoginDialog';
 import { gtag, getScrollPosition } from '../utils';
 import { ConfigContext, HistoryContext, ResetContext } from '../hooks';
+import NewSubjectProvider from '../hooks/useNewSubject';
 
 class App extends React.PureComponent {
   static getDerivedStateFromError(error) {
@@ -91,21 +92,23 @@ class App extends React.PureComponent {
     return (
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <ConfigContext.Provider value={config}>
-            <HistoryContext.Provider value={history}>
-              <ResetContext.Provider value={reset}>
-                <CssBaseline />
-                <QueryRenderer
-                  environment={relay}
-                  query={query}
-                  variables={variables}
-                  render={this.renderProps}
-                  cacheConfig={{ payload }}
-                />
-                <LoginDialog />
-              </ResetContext.Provider>
-            </HistoryContext.Provider>
-          </ConfigContext.Provider>
+          <NewSubjectProvider>
+            <ConfigContext.Provider value={config}>
+              <HistoryContext.Provider value={history}>
+                <ResetContext.Provider value={reset}>
+                  <CssBaseline />
+                  <QueryRenderer
+                    environment={relay}
+                    query={query}
+                    variables={variables}
+                    render={this.renderProps}
+                    cacheConfig={{ payload }}
+                  />
+                  <LoginDialog />
+                </ResetContext.Provider>
+              </HistoryContext.Provider>
+            </ConfigContext.Provider>
+          </NewSubjectProvider>
         </ThemeProvider>
       </StyledEngineProvider>
     );

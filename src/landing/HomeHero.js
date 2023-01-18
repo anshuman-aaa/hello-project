@@ -55,16 +55,17 @@ function HomeHero() {
 
   return (
     <div className={s.root}>
-      <Typography className={s.title} variant="h3">
-        Flying start for makers
-      </Typography>
-      <Typography className={s.subTitle} variant="h5">
-        Quickly bootstrap new web application projects on a solid
-        JavaScript-based tech stack and serverless architecture
-      </Typography>
-      <div className={s.actions}>
-        <LoginButton className={s.button} provider="google" />
-      </div>
+      <center>
+        <Typography className={s.title} variant="h3">
+          Hello Project
+        </Typography>
+        <Typography className={s.subTitle} variant="h5">
+          Sign-in to explore the tutoring!!
+        </Typography>
+        <div className={s.actions}>
+          <LoginButton className={s.button} provider="google" />
+        </div>
+      </center>
     </div>
   );
 }
