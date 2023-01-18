@@ -18,6 +18,7 @@ import UpsertSubjectMutation from '../mutations/UpsertSubject';
 // import { createFragmentContainer} from 'react-relay';
 
 function Confirm(props) {
+  // const {me} = props;
   console.log(props);
   // const { me } = props;
   const [state, setState] = React.useState({ ...props.data });

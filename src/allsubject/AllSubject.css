@@ -1,0 +1,13 @@
+.flex_box_ccontainer{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* min-height: 500px; */
+}
+
+.allsubject_card{
+  width:400px;
+  margin:10px;
+  border: 2px solid black;
+  min-height: 50px;
+}

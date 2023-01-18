@@ -37,6 +37,10 @@ export default createFragmentContainer(FinalPage, {
         price
         lesson
         expertise
+        user_id {
+          displayName
+        }
+        createdAt(format: "MMM Do, YYYY")
       }
     }
   `,

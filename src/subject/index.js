@@ -16,7 +16,7 @@ export default [
     // query: graphql`
     // `,
     render: ([FinalPage], data, { config }) => ({
-      // title: `Subject • ${config.app.name}`,
+      title: `Subject • ${config.app.name}`,
       component: (
         <Layout data={data}>
           <FinalPage data={data} />

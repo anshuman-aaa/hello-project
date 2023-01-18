@@ -15,6 +15,7 @@ import {
   GraphQLString,
   // GraphQLInterfaceType,
 } from 'graphql';
+import { dateField } from '../utils';
 
 import { UserType } from './user';
 // import { CommentType } from './comment';
@@ -51,7 +52,7 @@ export const SubjectType = new GraphQLObjectType({
       },
     },
 
-    // createdAt: dateField(self => self.created_at),
-    // updatedAt: dateField(self => self.updated_at),
+    createdAt: dateField(self => self.created_at),
+    updatedAt: dateField(self => self.updated_at),
   },
 });

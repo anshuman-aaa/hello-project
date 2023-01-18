@@ -27,4 +27,34 @@ export default [
       chunks: ['allsubject'],
     }),
   },
+
+  // {
+  //   path: '/allsubject/:slug',
+  //   components: () => [import(/* webpackChunkName: 'allsubject' */ './Sub')],
+  //   query: graphql`
+  //     query allsubjectSubQuery($slug: String!) {
+  //       ...Layout_data
+  //       (slug: $slug) {
+  //         ...Story_story
+  //         title
+  //         slug
+  //       }
+  //     }
+  //   `,
+  //   render: ([Story], data, ctx) => {
+  //     if (data.story && data.story.slug !== ctx.params.slug) {
+  //       return { status: 301, redirect: `/news/${data.story.slug}` };
+  //     } else if (data.story) {
+  //       return {
+  //         title: data.story.title,
+  //         component: (
+  //           <Layout data={data}>
+  //             <Story story={data.story} />
+  //           </Layout>
+  //         ),
+  //         chunks: ['story'],
+  //       };
+  //     }
+  //   },
+  // }
 ];

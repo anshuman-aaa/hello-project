@@ -59,6 +59,7 @@ exports.up = async db => {
     table.integer('lesson', 2000).notNullable();
     table.string('expertise').notNullable();
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.timestamps(false, true);
   });
 
   await db.schema.createTable('story_points', table => {

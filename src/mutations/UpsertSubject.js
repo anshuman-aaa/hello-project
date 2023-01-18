@@ -17,6 +17,8 @@ function commit(environment, input, done) {
             lesson
             expertise
             id
+            createdAt
+            updatedAt
           }
         }
       }

@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Story(props) {
+  console.log('Story page', props);
   const {
     story: { title, text, isURL },
   } = props;

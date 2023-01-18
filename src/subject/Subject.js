@@ -14,6 +14,8 @@ import { InputAdornment } from '@mui/material';
 // import { createFragmentContainer} from 'react-relay';
 
 function Subject({ data, setData, handlePage }) {
+  // const [backAlert, setBackAlert] = useState(0);
+
   const funcNext = () => {
     if (data.subject === '') {
       alert('Fill subject');
@@ -25,6 +27,12 @@ function Subject({ data, setData, handlePage }) {
       handlePage('next');
     }
   };
+
+  // const manageBackAlert = () => {
+  //   if(!(data.subject==="" && data.price===null && data.lesson===null && data.expertise.length===0)){
+
+  //   }
+  // }
 
   return (
     <Card

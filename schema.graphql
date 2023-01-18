@@ -130,6 +130,8 @@ type Subject implements Node {
   lesson: Int!
   expertise: String!
   user_id: User!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 input UpdateUserInput {
