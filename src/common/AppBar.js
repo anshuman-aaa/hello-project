@@ -92,6 +92,13 @@ function AppBar(props) {
           </IconButton>
         ) : (
           <React.Fragment>
+            {children}
+            {me && (
+              <Button color="inherit" component={Link} href="/addsubject">
+                Start Tutoring
+              </Button>
+            )}
+
             <Button color="inherit" component={Link} href="/news">
               News
             </Button>

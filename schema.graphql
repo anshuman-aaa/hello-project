@@ -17,6 +17,29 @@ type Comment implements Node {
   updatedAt(format: String): String
 }
 
+input CreateLessonInput {
+  subject: String
+  expertise: String
+  price: Float
+  num_of_lessons: Int
+  clientMutationId: String
+}
+
+type CreateLessonPayload {
+  lesson: Lesson
+  clientMutationId: String
+}
+
+input DeleteLessonInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteLessonPayload {
+  deletedLessonId: String
+  clientMutationId: String
+}
+
 input DeleteUserInput {
   id: ID!
   clientMutationId: String
@@ -36,6 +59,18 @@ type Identity {
   displayName: String
   photoURL: String
   profileURL: String
+}
+
+type Lesson {
+  # The ID of an object
+  id: ID!
+  user: User!
+  subject: String!
+  expertise: String!
+  price: String!
+  num_of_lessons: String!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 input LikeStoryInput {
@@ -60,6 +95,12 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Creates a Lesson
+  CreateLesson(input: CreateLessonInput!): CreateLessonPayload
+
+  # Deletes a Lesson
+  DeleteLesson(input: DeleteLessonInput!): DeleteLessonPayload
 }
 
 # An object with an ID
@@ -100,6 +141,7 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
+  getLessons: [Lesson]
 }
 
 type Story implements Node {
