@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 
 import LoginButton from '../common/LoginButton';
+import { Button } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +65,7 @@ function HomeHero() {
       </Typography>
       <div className={s.actions}>
         <LoginButton className={s.button} provider="google" />
+        <Button href="http://localhost:3000/subject">Subject</Button>
       </div>
     </div>
   );

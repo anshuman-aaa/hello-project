@@ -60,6 +60,9 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Add a Subject.
+  upsertSubject(input: UpsertSubjectInput!): UpsertSubjectPayload
 }
 
 # An object with an ID
@@ -100,6 +103,7 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
+  subjects: [Subject]
 }
 
 type Story implements Node {
@@ -114,6 +118,18 @@ type Story implements Node {
   pointsCount: Int!
   pointGiven: Boolean!
   commentsCount: Int!
+  createdAt(format: String): String
+  updatedAt(format: String): String
+}
+
+type Subject implements Node {
+  # The ID of an object
+  id: ID!
+  sub: String!
+  price: Int!
+  lesson: Int!
+  expertise: String!
+  user_id: User!
   createdAt(format: String): String
   updatedAt(format: String): String
 }
@@ -146,6 +162,19 @@ input UpsertStoryInput {
 
 type UpsertStoryPayload {
   story: Story
+  clientMutationId: String
+}
+
+input UpsertSubjectInput {
+  sub: String!
+  price: Int!
+  lesson: Int!
+  expertise: String!
+  clientMutationId: String
+}
+
+type UpsertSubjectPayload {
+  subject: Subject
   clientMutationId: String
 }
 
