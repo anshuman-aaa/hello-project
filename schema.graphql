@@ -17,6 +17,30 @@ type Comment implements Node {
   updatedAt(format: String): String
 }
 
+input CreateSubjectInput {
+  name: String
+  description: String
+  isexpert: Boolean
+  price: Int
+  numlesson: Int
+  clientMutationId: String
+}
+
+type CreateSubjectPayload {
+  subject: Subject
+  clientMutationId: String
+}
+
+input DeleteSubjectInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSubjectPayload {
+  deletedSubjectId: String
+  clientMutationId: String
+}
+
 input DeleteUserInput {
   id: ID!
   clientMutationId: String
@@ -60,6 +84,15 @@ type Mutation {
 
   # Marks the story as "liked".
   likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # creates a Subject.
+  createSubject(input: CreateSubjectInput!): CreateSubjectPayload
+
+  # Updates a Subject.
+  updateSubject(input: UpdateSubjectInput!): UpdateSubjectPayload
+
+  # Deletes a Subject.
+  deleteSubject(input: DeleteSubjectInput!): DeleteSubjectPayload
 }
 
 # An object with an ID
@@ -95,6 +128,8 @@ type Query {
     # The IDs of objects
     ids: [ID!]!
   ): [Node]!
+
+  # Some desc
   me: User
   user(username: String!): User
   users(after: String, first: Int): UserConnection
@@ -116,6 +151,32 @@ type Story implements Node {
   commentsCount: Int!
   createdAt(format: String): String
   updatedAt(format: String): String
+}
+
+type Subject {
+  # The ID of an object
+  id: ID!
+  name: String
+  description: String
+  price: Int
+  isexpert: Boolean
+  numlesson: Int
+  mentorid: String
+}
+
+input UpdateSubjectInput {
+  id: ID!
+  name: String
+  description: String
+  isexpert: Boolean
+  price: Int
+  numlesson: Int
+  clientMutationId: String
+}
+
+type UpdateSubjectPayload {
+  subject: Subject
+  clientMutationId: String
 }
 
 input UpdateUserInput {
@@ -160,6 +221,7 @@ type User implements Node {
   identities: [Identity]
   isAdmin: Boolean
   firebaseToken: String
+  subjects: [Subject]
   createdAt(format: String): String
   updatedAt(format: String): String
   lastLoginAt(format: String): String

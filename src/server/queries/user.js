@@ -17,6 +17,7 @@ import { countField } from '../utils';
 import { UserType } from '../types';
 
 export const me = {
+  description: 'Some desc',
   type: UserType,
 
   resolve(root, args, ctx) {

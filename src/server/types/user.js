@@ -15,6 +15,7 @@ import {
 } from 'graphql';
 
 import { IdentityType } from './identity';
+import { SubjectType } from './subject';
 import { nodeInterface } from '../node';
 import { dateField } from '../utils';
 
@@ -83,7 +84,12 @@ export const UserType = new GraphQLObjectType({
           : null;
       },
     },
-
+    subjects: {
+      type: new GraphQLList(SubjectType),
+      resolve(self, args, ctx) {
+        return ctx.subjectsByUid(self.id);
+      },
+    },
     createdAt: dateField(x => x.created_at),
     updatedAt: dateField(x => x.updated_at),
     lastLoginAt: dateField(x => x.last_login_at),

@@ -70,6 +70,7 @@ exports.up = async db => {
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.primary(['comment_id', 'user_id']);
   });
+
 };
 
 exports.down = async db => {

@@ -149,6 +149,19 @@ export class Context {
       ),
   );
 
+  subjectsByUid = uid =>
+    db
+      .table('subjects')
+      .where('mentorid', uid)
+      .select();
+
+  subjectById = id =>
+    db
+      .table('subjects')
+      .where('id', id)
+      .subject()
+      .then(rows => rows[0]);
+
   storyPointGiven = new DataLoader(keys => {
     const { id: userId } = this.user;
 
