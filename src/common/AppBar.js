@@ -5,7 +5,7 @@
  */
 
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import makeStyles from '@mui/styles/makeStyles';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Typography } from '@mui/material';
-
+import AddSubject from '../landing/AddSubject';
 import Link from './Link';
 import UserMenu from './UserMenu';
 import { useConfig, useHistory, useAuth } from '../hooks';
@@ -60,6 +60,10 @@ function AppBar(props) {
   const auth = useAuth();
   const s = useStyles();
 
+  function handleAddSub() {
+    setDstate(true);
+  }
+
   function handleClose() {
     history.replace('/');
   }
@@ -76,13 +80,22 @@ function AppBar(props) {
     closeUserMenu();
     auth.signIn();
   }
-
+  const [dstate, setDstate] = useState(false);
+  function closeDiag() {
+    setDstate(false);
+  }
   return (
     <MuiAppBar className={clsx(s.root, className)} elevation={0} {...other}>
       <Toolbar>
+        <AddSubject me={me} relay={relay} open={dstate} onClose={closeDiag} />
+        {me && (
+          <Button variant="contained" onClick={handleAddSub}>
+            Add Subject
+          </Button>
+        )}
         <Typography className={s.title} variant="h1">
           <Link className={s.titleLink} href="/">
-            {app.name}
+            {app.name + ' Hello'}
           </Link>
         </Typography>
         <span style={{ flexGrow: 1 }} />

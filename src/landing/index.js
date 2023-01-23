@@ -30,4 +30,32 @@ export default [
       chunks: ['home'],
     }),
   },
+  {
+    path: '/listsubjects',
+    query: graphql`
+      query landingPageSubjectQuery {
+        ...Layout_data
+        ...ListSubjects_me
+        me {
+          subjects {
+            name
+            description
+            price
+            numlesson
+            isexpert
+          }
+        }
+      }
+    `,
+    components: () => [import('./ListSubjects'), import('./HomeHero')],
+    render: ([ListSubjects, HomeHero], data, { config }) => ({
+      title: config.app.name,
+      component: (
+        <Layout data={data}>
+          <ListSubjects subs={data.me.subjects} />
+        </Layout>
+      ),
+    }),
+    chunks: ['addsub'],
+  },
 ];

@@ -20,6 +20,8 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
         return context.storyById.load(id).then(assignType('Story'));
       case 'Comment':
         return context.commentById.load(id).then(assignType('Comment'));
+      // case 'Subject':
+      //   return context.commentById.load(id).then(assignType('Subject'));
       default:
         return null;
     }
@@ -32,6 +34,8 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
         return require('./types').StoryType;
       case 'Comment':
         return require('./types').CommentType;
+      case 'Subject':
+        return require('./types').SubjectType;
       default:
         return null;
     }
